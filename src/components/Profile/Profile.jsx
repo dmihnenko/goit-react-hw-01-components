@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
-import { ProfileContainer } from './Profile.styled';
-import { ProfileDescription } from './Profile.styled';
-import { ProfileImage } from './Profile.styled';
-import { ProfileUsername } from './Profile.styled';
-import { ProfileTagLocation } from './Profile.styled';
-import { ProfileList } from './Profile.styled';
-import { ProfileListSocial } from './Profile.styled';
-import { ProfileListFollowers } from './Profile.styled';
+import {
+  ProfileContainer,
+  ProfileDescription,
+  ProfileImage,
+  ProfileUsername,
+  ProfileTagLocation,
+  ProfileList,
+  ProfileListSocial,
+  ProfileListFollowers,
+} from './Profile.styled';
 
-export const Profile = props => {
-  const { username, tag, location, avatar, followers, views, likes } = props;
+export const Profile = ({ username, tag, location, avatar, stats }) => {
   return (
     <ProfileContainer>
       <ProfileDescription>
@@ -22,26 +23,28 @@ export const Profile = props => {
       <ProfileList>
         <ProfileListSocial>
           <ProfileListFollowers>Followers</ProfileListFollowers>
-          <span className="quantity">{followers}</span>
+          <span className="quantity">{stats.followers}</span>
         </ProfileListSocial>
         <ProfileListSocial>
           <ProfileListFollowers>Views</ProfileListFollowers>
-          <span className="quantity">{views}</span>
+          <span className="quantity">{stats.views}</span>
         </ProfileListSocial>
         <ProfileListSocial>
           <ProfileListFollowers>Likes </ProfileListFollowers>
-          <span className="quantity">{likes}</span>
+          <span className="quantity">{stats.likes}</span>
         </ProfileListSocial>
       </ProfileList>
     </ProfileContainer>
   );
 };
 Profile.propTypes = {
-  avatar: PropTypes.string,
-  tag: PropTypes.string,
-  username: PropTypes.string,
-  location: PropTypes.string,
-  followers: PropTypes.number,
-  views: PropTypes.number,
-  likes: PropTypes.number,
+  avatar: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  stats: PropTypes.shape({
+    followers: PropTypes.number.isRequired,
+    views: PropTypes.number.isRequired,
+    likes: PropTypes.number.isRequired,
+  }).isRequired,
 };
